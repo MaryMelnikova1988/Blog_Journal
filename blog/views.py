@@ -1,4 +1,5 @@
 import random
+from datetime import date
 
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy, reverse
@@ -20,6 +21,7 @@ class BlogCreateView(CreateView):
         if form.is_valid():
             self.object = form.save()
             self.object.author = self.request.user
+            self.object.date_of_creation = date.today()
             self.object.save()
 
         return super().form_valid(form)
@@ -68,7 +70,7 @@ class BlogDeleteView(DeleteView):
 
 
 def toogle_activity(request, pk):
-    """Снять или опубликовать (только для автора)"""
+    """Снять или опубликовать статью(только для автора)"""
     blog_item = get_object_or_404(Blog, pk=pk)
     if blog_item.is_published:
         blog_item.is_published = False
