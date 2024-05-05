@@ -19,7 +19,5 @@ urlpatterns = [
     path('success/', success_subscription, name='success_subscription'),
 
     path('subscription/create/', create_subscription, name='subscription_create'),
-    # path('success_payment/', TemplateView.as_view(template_name='users/success_payment.html'), name='success_payment'),
-    # path('success_subscription/', success_subscription, name='success_subscription'),
 
 ]
