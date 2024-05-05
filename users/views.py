@@ -38,8 +38,14 @@ class ProfileView(UpdateView):
 
 def create_subscription(request):
     """Создание оплаты подписки"""
-    session = create_payment_session(request)
-    return redirect(session.url)
+    if request.user.is_authenticated:
+        user = request.user
+        if not user.is_subscribed:
+            session = create_payment_session(request)
+            return redirect(session.url)
+        else:
+            messages.info(request, 'У вас уже есть активная подписка.')
+            return redirect('blog:index')
 
 
 def cancel_subscription(request):
@@ -51,13 +57,11 @@ def success_subscription(request):
     """Обработка оплаты подписки"""
     if request.user.is_authenticated:
         user = request.user
-        if not user.is_subscribed:
-            user.is_subscribed = True
-            user.save()
-            messages.success(request, 'Подписка успешно оформлена!')
-        else:
-            messages.info(request, 'У вас уже есть активная подписка.')
+        user.is_subscribed = True
+        user.save()
+        messages.success(request, 'Подписка успешно оформлена!')
         return redirect('blog:index')
+
     else:
         messages.error(request, 'Что-то пошло не так. Пожалуйста, повторите попытку.')
         return redirect('users:login')

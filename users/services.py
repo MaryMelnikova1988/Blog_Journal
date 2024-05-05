@@ -15,7 +15,7 @@ def create_payment_session(request):
             'price_data': {
                 'currency': 'rub',
                 'product_data': {
-                    'name': "Подписка на Blog_Journal",
+                    'name': "Подписка на Blog Journal",
                 },
                 'unit_amount': 100 * 100,
             },
