@@ -42,7 +42,7 @@ class BlogListView(ListView):
 class BlogSubscriptionListView(ListView):
     """Получение листа публикаций"""
     model = Blog
-    template_name = 'blog/list_subscription.html'
+    template_name = 'blog/blog_list_subscription.html'
     extra_context = {
         'title': " Блог по подписке",
     }

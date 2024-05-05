@@ -1,0 +1,46 @@
+[
+  {
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$x9hwYHizAQbsIWKjblTvZU$O1FQ0n7QV4QwJDCnCNNf0DwFefU+6R8NnL9Y5XvvoTg=",
+      "last_login": "2024-05-05T19:18:55.102Z",
+      "is_superuser": true,
+      "first_name": "Admin",
+      "last_name": "SkyPro",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-05-05T19:16:57.702Z",
+      "phone": "89512848316",
+      "email": "admin@sky.pro",
+      "avatar": "",
+      "country": null,
+      "nickname": "Mary",
+      "is_subscribed": true,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$XAhPCafHXZfpEJXL1UPf82$0S+3dWHR2vPNwp+mjSSb0dTrBdbc3cwUYfVGKOLoAKs=",
+      "last_login": "2024-05-05T19:47:28.998Z",
+      "is_superuser": false,
+      "first_name": "Анатолий",
+      "last_name": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-05-05T19:18:06.306Z",
+      "phone": "89512848313",
+      "email": "",
+      "avatar": "",
+      "country": null,
+      "nickname": "Анатолий",
+      "is_subscribed": true,
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+]
