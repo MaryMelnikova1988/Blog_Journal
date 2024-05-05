@@ -1,10 +1,9 @@
 {% extends 'blog/base.html' %}
 {% block content%}
-{% if user.is_authenticated %}
 <div class="col-12 mb-5">
     <a class="btn btn-outline-primary" href="{% url 'blog:create' %}">Добавить блоговую запись</a>
 </div>
-{% endif%}
+
 
 <div class="row">
     {% for object in object_list %}

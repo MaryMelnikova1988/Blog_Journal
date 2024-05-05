@@ -14,7 +14,6 @@ class BlogCreateView(CreateView):
     """Создание публикации"""
     model = Blog
     form_class = BlogForm
-    # fields = ('title', 'body', 'preview', 'date_of_creation',)
     success_url = reverse_lazy('blog:list')
 
     def form_valid(self, form):
@@ -31,13 +30,26 @@ class BlogListView(ListView):
     """Получение листа публикаций"""
     model = Blog
     extra_context = {
-        'title': " Блог",
+        'title': " Блог без подписки",
     }
 
     def get_queryset(self, *args, **kwargs):
         queryset = super().get_queryset(*args, **kwargs)
-        if not self.request.user:
-            queryset = queryset.filter(is_published=True)
+        queryset = queryset.filter(is_published=True, is_subscribed=False)
+        return queryset
+
+
+class BlogSubscriptionListView(ListView):
+    """Получение листа публикаций"""
+    model = Blog
+    template_name = 'blog/list_subscription.html'
+    extra_context = {
+        'title': " Блог по подписке",
+    }
+
+    def get_queryset(self, *args, **kwargs):
+        queryset = super().get_queryset(*args, **kwargs)
+        queryset = queryset.filter(is_published=True, is_subscribed=True)
         return queryset
 
 
@@ -56,7 +68,6 @@ class BlogUpdateView(UpdateView):
     """Редактирование публикации (только для автора)"""
     model = Blog
     form_class = BlogForm
-    # fields = ('title', 'body', 'preview', 'date_of_creation',)
     success_url = reverse_lazy('blog:list')
 
     def get_success_url(self):
@@ -91,7 +102,8 @@ class IndexView(TemplateView):
         context_data = super().get_context_data(**kwargs)
         context_data['publish_blog_count'] = len(Blog.objects.filter(is_published=True))
         context_data['users_count'] = len(User.objects.all())
-        context_data['object_list'] = random.sample(list(Blog.objects.all()), 3)
+        context_data['object_list'] = random.sample(list(Blog.objects.filter(is_subscribed=False, is_published=True)),
+                                                    3)
 
         return context_data
 

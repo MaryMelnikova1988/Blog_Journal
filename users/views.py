@@ -1,9 +1,11 @@
-from django.shortcuts import redirect
+from django.contrib import messages
+from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, UpdateView
 
 from users.forms import RegisterForm, UserProfileForm
 from users.models import User
+from users.services import create_payment_session
 
 
 class RegisterView(CreateView):
@@ -28,7 +30,34 @@ class ProfileView(UpdateView):
     """Профиль пользователя"""
     model = User
     form_class = UserProfileForm
-    success_url = reverse_lazy('users:success_message')
+    success_url = reverse_lazy('users:success_profile')
 
     def get_object(self, queryset=None):  # тем самым уходим от привязки с pk
         return self.request.user
+
+
+def create_subscription(request):
+    """Создание оплаты подписки"""
+    session = create_payment_session(request)
+    return redirect(session.url)
+
+
+def cancel_subscription(request):
+    """URL для перенаправления в случае отмены платежа"""
+    return render(request, 'users/cancel_payment.html')
+
+
+def success_subscription(request):
+    """Обработка оплаты подписки"""
+    if request.user.is_authenticated:
+        user = request.user
+        if not user.is_subscribed:
+            user.is_subscribed = True
+            user.save()
+            messages.success(request, 'Подписка успешно оформлена!')
+        else:
+            messages.info(request, 'У вас уже есть активная подписка.')
+        return redirect('blog:index')
+    else:
+        messages.error(request, 'Что-то пошло не так. Пожалуйста, повторите попытку.')
+        return redirect('users:login')

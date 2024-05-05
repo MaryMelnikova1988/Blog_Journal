@@ -33,7 +33,7 @@
                             <p> {{object.body}}</p>
                             <p></p>
                             <p> Дата создания: {{object.date_of_creation}}</p>
-                            <p> Автор: {{object.author|default:"не указан"}}</p>
+                            <p> Автор: {{object.author.nickname|default:"не указан"}}</p>
 
                             <img class="card-img-top"
                                  src="/media/{{object.preview}}"

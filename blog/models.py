@@ -13,6 +13,7 @@ class Blog(models.Model):
     views_count = models.IntegerField(default=0, verbose_name='Просмотры')
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL,verbose_name='Автор', **NULLABLE)
+    is_subscribed = models.BooleanField(default=False, verbose_name='По подписке')
 
     def __str__(self):
         return f'{self.title}'
