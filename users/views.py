@@ -46,6 +46,10 @@ def create_subscription(request):
         else:
             messages.info(request, 'У вас уже есть активная подписка.')
             return redirect('blog:index')
+    else:
+        messages.error(request,
+                       'Пожалуйста, зарегистрируйтесь и войдите в личный профиль на сайте, и повторите попытку!')
+        return redirect('users:login')
 
 
 def cancel_subscription(request):

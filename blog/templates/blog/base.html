@@ -46,11 +46,15 @@
     {% block content %}
     {% endblock %}
 
-<!--                <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus-->
-<!--                    commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet.</p>-->
-<!--                <p><a class="btn btn-lg btn-success" href="#" role="button">Get started today</a></p>-->
+    <p class="lead"></p>
+    {% if not user.is_authenticated or not user.is_subscribed %}
+    <p class="lead">Для получения полного доступа к сайту. Приобретите подписку за 100 рублей. Платите 1 раз и
+        пользуетесь сколько угодно нашим сервисом в свое удовольствие! До приобретения подписки обязательно
+        зарегистрируйтесь на сайте. Кнопка "Регистрация"! А потом не забудьте нажать кнопку "Войти"! </p>
+    <!--                <p><a class="btn btn-lg btn-success" href="#" role="button">Get started today</a></p>-->
+    {% endif %}
 
-<!--     Site footer-->
+    <!--     Site footer-->
     <footer class="footer">
         <p>&copy; 2024-{% now 'Y'%}</p>
     </footer>

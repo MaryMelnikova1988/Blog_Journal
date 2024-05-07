@@ -60,3 +60,8 @@
 Удаление контейнеров: docker-compose down
 
 Проверка в shelle всех запущенных и остановленных контейнеров: docker ps -a
+
+Ссылка на тестовые карточки для stripe:
+https://docs.stripe.com/terminal/references/testing#standard-test-cards
+![img.png](img.png)
+

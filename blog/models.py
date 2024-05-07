@@ -12,7 +12,7 @@ class Blog(models.Model):
     is_published = models.BooleanField(default=True, verbose_name='Опубликовано')
     views_count = models.IntegerField(default=0, verbose_name='Просмотры')
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL,verbose_name='Автор', **NULLABLE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, verbose_name='Автор', **NULLABLE)
     is_subscribed = models.BooleanField(default=False, verbose_name='По подписке')
 
     def __str__(self):
