@@ -25,6 +25,12 @@
             </li>
             {% endif %}
 
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'blog:list_author' %}">Блог пользователя как автора </a>
+            </li>
+            {% endif %}
+
 
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'blog:contacts' %}">О нас. Контакты</a>

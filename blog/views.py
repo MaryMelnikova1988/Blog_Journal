@@ -27,7 +27,7 @@ class BlogCreateView(CreateView):
 
 
 class BlogListView(ListView):
-    """Получение листа публикаций"""
+    """Получение листа публикаций без подписки"""
     model = Blog
     extra_context = {
         'title': " Блог без подписки",
@@ -40,7 +40,7 @@ class BlogListView(ListView):
 
 
 class BlogSubscriptionListView(ListView):
-    """Получение листа публикаций"""
+    """Получение листа публикаций по подписке"""
     model = Blog
     template_name = 'blog/blog_list_subscription.html'
     extra_context = {
@@ -50,6 +50,21 @@ class BlogSubscriptionListView(ListView):
     def get_queryset(self, *args, **kwargs):
         queryset = super().get_queryset(*args, **kwargs)
         queryset = queryset.filter(is_published=True, is_subscribed=True)
+        return queryset
+
+
+class BlogAuthorListView(ListView):
+    """Получение листа публикаций за пользователем-автором"""
+    model = Blog
+    template_name = 'blog/blog_list_author.html'
+    extra_context = {
+        'title': " Блог Пользователя как Автора ",
+    }
+
+    def get_queryset(self, *args, **kwargs):
+        queryset = super().get_queryset(*args, **kwargs)
+        if self.request.user:
+            queryset = queryset.filter(author=self.request.user.pk)
         return queryset
 
 
